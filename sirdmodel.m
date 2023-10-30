@@ -12,9 +12,9 @@ A_no_reinfection = [
     ];
 
 A_reinfection = [ 
-    0.95, 0.04, 1, 0;
-    0.05, 0.85, 0, 0;
-    0, .10, 0, 0;
+    0.95, 0.04, 0.34 0;
+    0.05, 0.85, 0.33, 0;
+    0, .10, 0.33, 0;
     0, .01, 0, 1
     ];
 
@@ -35,16 +35,18 @@ figure;
 % these loops update xt (the sim with no re-infection) 
 % and zt (the sim with re-infection).
 
-for i = 1:200
+n = 500;
+
+for i = 1:n
     xt(:, i) = (A_no_reinfection^i) * x0;
 end
 
-for j = 1:200
+for j = 1:n
     zt(:, j) = (A_reinfection^j) * x0;
 end
 
 % these loops scatter plot xt and zt.
-for i = 1:200
+for i = 1:n
     scatter(i, xt(1, i), '.r')
     hold on;
     scatter(i, xt(2, i), '.g')
@@ -61,7 +63,7 @@ ylabel('Percent');
 legend('Susceptible', 'Infected', 'Recovered', 'Dead');
 
 figure;
-for j = 1:200
+for j = 1:n
     scatter(j, zt(1, j), '.r')
     hold on;
     scatter(j, zt(2, j), '.g')

@@ -13,6 +13,7 @@ cases_omicron = cases_STL(omicron_range);
 deaths_delta = deaths_STL(delta_range);
 deaths_omicron = deaths_STL(omicron_range);
 
+% Percentage of the St. Louis city/count for above data.
 percent_cases_delta = cases_delta/POP_STL;
 percent_cases_omicron = cases_omicron/POP_STL;
 percent_deaths_delta = deaths_delta/ POP_STL;
@@ -37,8 +38,14 @@ x0 = [1.0 0 0 0];
 % Type 'help ss', 'help lsim', etc., to learn about how these functions work!!
 sys_sir_base = ss(A,B,eye(4),zeros(4,1),1);
 Y = lsim(sys_sir_base,zeros(1000,1),linspace(0,999,1000),x0);
-Y_delta= Y(delta_range);
-Y_omicron = Y(omicron_range);
+
+Y_cases = Y(:, 2);
+Y_deaths = Y(:, 4);
+
+Y_delta_deaths = Y_deaths(delta_range);
+Y_omicron_deaths = Y_deaths(omicron_range);
+Y_delta_cases = Y_cases(delta_range);
+Y_omicron_cases = Y_cases(omicron_range);
 
 % % plot the output trajectory
 % plot(Y);
@@ -50,19 +57,23 @@ Y_omicron = Y(omicron_range);
 % The following plots the actual death and case data for the two variants.
 % The time values need to match up!!!
 figure;
-plot(Y_delta);
+plot(Y_delta_cases);
 hold on;
-plot(cases_delta)
+plot(Y_delta_deaths);
 hold on;
-plot(deaths_delta)
-legend('Y delta', 'cases delta', 'deaths delta')
+plot(percent_cases_delta)
+hold on;
+plot(percent_deaths_delta)
+legend('Y delta cases', 'Y delta deaths', 'cases delta', 'deaths delta')
 hold off;
 
 figure;
-plot(Y_omicron);
+plot(Y_omicron_cases);
 hold on;
-plot(cases_omicron)
+plot(Y_omicron_deaths);
 hold on;
-plot(deaths_omicron)
-legend('Y omicron', 'cases omicron', 'deaths omicron')
+plot(percent_cases_omicron)
+hold on;
+plot(percent_deaths_omicron)
+legend('Y omicron cases', 'Y omicron deaths', 'cases omicron', 'deaths omicron')
 hold off;

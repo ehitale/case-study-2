@@ -36,15 +36,18 @@ percent_susceptible = 1 - percent_recovered - percent_delta_start_deaths - perce
 % Let's try and make it match the data. model_1 should match delta, and
 % model_2 should match omicron.
 A_model_1 = [
-    0.95 0.44 0 0;
-    0.05 0.45 0 0; 
-    0 0.1 1 0; 
-    0 0.01 0 1];
+    0.99  0.79989999   0 0;
+    0.01  0.0001       0 0; 
+    0     0.2          1 0; 
+    0     0.00000001   0 1
+    ];
+
 A_model_2 = [
-    0.96 0.04 0 0;
-    0.04 0.85 0 0;
-    0 0.1 1 0;
-    0 0.01 0 1];
+    0.99  0.79989999   0 0;
+    0.01  0.0001       0 0; 
+    0     0.2          1 0; 
+    0     0.00000001   0 1
+    ];
 
 % The following matrix is needed to use the lsim function to simulate the
 % system in question
@@ -100,9 +103,9 @@ hold on;
 legend('Y delta cases', 'Y delta deaths')
 
 figure;
-plot(percent_cases_delta * POP_STL)
+plot(cases_delta)
 hold on;
-plot(percent_deaths_delta * POP_STL)
+plot(deaths_delta)
 legend('cases delta', 'deaths delta')
 hold off;
 
@@ -114,8 +117,8 @@ hold on;
 legend('Y omicron cases', 'Y omicron deaths')
 
 figure;
-plot(percent_cases_omicron * POP_STL)
+plot(cases_omicron)
 hold on;
-plot(percent_deaths_omicron * POP_STL)
+plot(deaths_omicron)
 legend('cases omicron', 'deaths omicron')
 hold off;

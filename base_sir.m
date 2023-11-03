@@ -36,18 +36,27 @@ percent_susceptible = 1 - percent_recovered - percent_delta_start_deaths - perce
 % Let's try and make it match the data. model_1 should match delta, and
 % model_2 should match omicron.
 A_model_1 = [
-    0.99  0.79989999   0 0;
-    0.01  0.0001       0 0; 
-    0     0.2          1 0; 
-    0     0.00000001   0 1
+    0.99  0.79989999      0 0;
+    0.01  0.0001 +        0 0; 
+    0     0.2 +           1 0; 
+    0     0.00000001      0 1
     ];
 
 A_model_2 = [
-    0.99  0.79989999   0 0;
-    0.01  0.0001       0 0; 
-    0     0.2          1 0; 
-    0     0.00000001   0 1
+    0.99  0.79989999      0 0;
+    0.01  0.0001 +        0 0; 
+    0     0.2 +           1 0; 
+    0     0.00000001      0 1
     ];
+
+% 2: Even our limited models suggest a change in policy. 
+% 3a: Our policy is a vaccine that reduces the infection rate and increases
+% the recovery (and immunity) rate. 
+% We implemented this by adding and substracting experimentally determined values 
+% from the infection rate and the recovery rate. Unfortunately, it does not
+% seem to work. 
+% 3B: As shown by the worldwide response to the Covid-19 pandemic,
+% vaccines are a feasible way of reducing infection rates. 
 
 % The following matrix is needed to use the lsim function to simulate the
 % system in question
